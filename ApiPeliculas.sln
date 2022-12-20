@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPeliculas", "ApiPeliculas\ApiPeliculas.csproj", "{8BE297B5-8119-48AA-B7E2-B730D6BB21BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BE297B5-8119-48AA-B7E2-B730D6BB21BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE297B5-8119-48AA-B7E2-B730D6BB21BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE297B5-8119-48AA-B7E2-B730D6BB21BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE297B5-8119-48AA-B7E2-B730D6BB21BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
