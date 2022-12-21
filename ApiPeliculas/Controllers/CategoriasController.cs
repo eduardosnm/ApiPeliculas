@@ -40,7 +40,6 @@ public class CategoriasController : ControllerBase
     [HttpGet("{categoriaId:int}", Name = "GetCategoria")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetCategoria(int categoriaId)
     {
