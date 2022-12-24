@@ -2,6 +2,7 @@ using ApiPeliculas.Modelos;
 using ApiPeliculas.Modelos.Dtos;
 using ApiPeliculas.Repositorio.IRepositorio;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPeliculas.Controllers;
@@ -20,6 +21,7 @@ public class PeliculasController : ControllerBase
         _mapper = mapper;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -32,6 +34,7 @@ public class PeliculasController : ControllerBase
         return Ok(listaPeliculasDto);
     }
     
+    [AllowAnonymous]
     [HttpGet("{peliculaId:int}", Name = "GetPelicula")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -50,9 +53,11 @@ public class PeliculasController : ControllerBase
         return Ok(itemPeliculaDto);
     }
     
+    [Authorize(Roles = "admin")]
     [HttpPost]
     [ProducesResponseType(201, Type = typeof(PeliculaDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -81,9 +86,11 @@ public class PeliculasController : ControllerBase
         return CreatedAtRoute("GetPelicula", new { peliculaId = pelicula.Id }, pelicula);
     }
     
+    [Authorize(Roles = "admin")]
     [HttpPatch("{peliculaId:int}", Name = "ActualizarPatchPelicula")]
     [ProducesResponseType(204, Type = typeof(PeliculaDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public IActionResult ActualizarPatchPelicula(int peliculaId, [FromBody] PeliculaDto peliculaDto)
@@ -109,8 +116,10 @@ public class PeliculasController : ControllerBase
         return NoContent();
     }
     
+    [Authorize(Roles = "admin")]
     [HttpDelete("{peliculaId:int}", Name = "BorrarPelicula")]
     [ProducesResponseType(201, Type = typeof(PeliculaDto))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -3,6 +3,7 @@ using ApiPeliculas.Modelos;
 using ApiPeliculas.Modelos.Dtos;
 using ApiPeliculas.Repositorio.IRepositorio;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPeliculas.Controllers;
@@ -22,7 +23,9 @@ public class UsuariosController : ControllerBase
         this._respuestaApi = new();
     }
     
+    [Authorize(Roles = "admin")]
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetUsuarios()
@@ -34,8 +37,10 @@ public class UsuariosController : ControllerBase
         return Ok(listaUsuariosDto);
     }
     
+    [Authorize(Roles = "admin")]
     [HttpGet("{usuarioId:int}", Name = "GetUsuario")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetUsuario(int usuarioId)
@@ -52,6 +57,7 @@ public class UsuariosController : ControllerBase
         return Ok(itemUsuarioDto);
     }
     
+    [AllowAnonymous]
     [HttpPost("registro")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -82,6 +88,7 @@ public class UsuariosController : ControllerBase
         return Ok(_respuestaApi);
     }
     
+    [AllowAnonymous]
     [HttpPost("login")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
