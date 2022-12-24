@@ -23,6 +23,8 @@ public class CategoriasController : ControllerBase
 
     [AllowAnonymous]
     [HttpGet]
+    //[ResponseCache(Duration = 20)]
+    [ResponseCache(CacheProfileName = "PorDefecto20Segundos")]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetCategorias()
@@ -41,6 +43,7 @@ public class CategoriasController : ControllerBase
     
     [AllowAnonymous]
     [HttpGet("{categoriaId:int}", Name = "GetCategoria")]
+    [ResponseCache(Duration = 20)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK)]
